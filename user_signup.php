@@ -29,19 +29,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!-- HTML form -->
+<!-- HTML with Bootstrap -->
 <!DOCTYPE html>
-<html>
-<head><title>Signup</title></head>
-<body>
-    <h2>User Signup</h2>
-    <?php if (!empty($errors)) foreach ($errors as $error) echo "<p style='color:red;'>$error</p>"; ?>
-    <form method="POST">
-        <input type="text" name="name" placeholder="Name" required><br><br>
-        <input type="email" name="email" placeholder="Email" required><br><br>
-        <input type="text" name="phone" placeholder="Phone (10-12 digits)" required><br><br>
-        <input type="password" name="password" placeholder="Password" required><br><br>
-        <button type="submit">Sign Up</button>
-    </form>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Signup</title>
+    <!-- ✅ Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-light d-flex align-items-center" style="min-height: 100vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-lg p-4 rounded">
+                    <h2 class="text-center mb-4">User Signup</h2>
+
+                    <?php if (!empty($errors)): ?>
+                        <div class="alert alert-danger">
+                            <?php foreach ($errors as $error): ?>
+                                <div><?php echo $error; ?></div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <form method="POST">
+                        <div class="mb-3">
+                            <input type="text" name="name" class="form-control" placeholder="Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="phone" class="form-control" placeholder="Phone (10-12 digits)" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-pink" style="background-color:rgb(127, 17, 45); color: white;">
+                                Sign Up
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

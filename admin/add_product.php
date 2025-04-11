@@ -8,22 +8,31 @@ include '../includes/connection.php';
 
 $message = '';
 
+// Show success message
+if (isset($_GET['msg']) && $_GET['msg'] === 'success') {
+    $message = "✅ Product added successfully!";
+}
+
+// Handle product submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $price = $_POST['price'];
     $category = $_POST['category'];
+    $gender = $_POST['gender'];
+    $description = $_POST['description'];
 
-    // Handle image upload
+    // Image handling
     $image = $_FILES['image']['name'];
     $image_tmp = $_FILES['image']['tmp_name'];
-    $image_path = "../assets/product_images/" . $image;
+    $image_path = "../assets/product_images/" . basename($image);
 
     if (move_uploaded_file($image_tmp, $image_path)) {
-        $stmt = $conn->prepare("INSERT INTO products (name, price, category, image) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("sdss", $name, $price, $category, $image);
+        $stmt = $conn->prepare("INSERT INTO products (name, price, category, gender, image, description) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sdssss", $name, $price, $category, $gender, $image, $description);
 
         if ($stmt->execute()) {
-            $message = "✅ Product added successfully!";
+            header("Location: add_product.php?msg=success");
+            exit();
         } else {
             $message = "❌ Failed to add product!";
         }
@@ -44,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #f7f7f7;
         }
         .form-container {
-            max-width: 600px;
+            max-width: 650px;
             background: #fff;
-            padding: 30px;
-            margin: 50px auto;
+            padding: 35px;
+            margin: 60px auto;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
         }
@@ -59,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <div class="container form-container">
     <h2 class="mb-4 text-center">Add New Product</h2>
-    
+
     <?php if ($message): ?>
         <div class="alert alert-info"><?= $message ?></div>
     <?php endif; ?>
@@ -76,8 +85,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select name="gender" class="form-control" required>
+                <option value="">Select Gender</option>
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+                <option value="unisex">Unisex</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Category</label>
-            <input type="text" name="category" class="form-control" placeholder="Enter product category" required>
+            <select name="category" class="form-control" required>
+                <option value="">Select Category</option>
+                <option value="shirts">Shirts</option>
+                <option value="pants">Pants</option>
+                <option value="tshirts">T-Shirts</option>
+                <option value="jeans">Jeans</option>
+                <option value="suit">Suit</option>
+                <option value="shirt and pants">Shirt and Pants</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Product Description</label>
+            <textarea name="description" class="form-control" rows="4" placeholder="Write product description..." required></textarea>
         </div>
 
         <div class="mb-3">
@@ -91,6 +123,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </form>
 </div>
-
 </body>
 </html>

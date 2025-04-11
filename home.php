@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Our Products</title>
+    <title>Shopcy Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -23,9 +23,6 @@
             object-fit: cover;
         }
         .card-text {
-            max-height: 60px;
-            overflow: hidden;
-            text-overflow: ellipsis;
             font-size: 0.95rem;
         }
         .card-title {
@@ -34,12 +31,104 @@
         }
         .price-tag {
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 600;
+        }
+        #hero {
+            background-image: url("./assets/banners/banner1.jpg");
+            height: 90vh;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            padding: 0 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+        #hero h1, #hero h2, #hero h4, #hero p {
+            margin: 0;
+        }
+        #hero button {
+            background-color: rgba(236, 228, 228, 0.8);
+            color: #333;
+            border: none;
+            padding: 12px 30px;
+            margin-top: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        #hero button:hover {
+            background-color: rgb(141, 109, 115);
+            color: #000;
+        }
+
+        .custom-cart-btn {
+            background-color: rgb(159, 40, 88); 
+            color: white;
+            font-weight: 600;
+            border: none;
+            border-radius: 7px;
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            padding: 12px 0;
+            margin-top: 10px;
+            height: 40px;
+            text-decoration: none;
+        }
+
+        .custom-cart-btn:hover {
+            background-color: rgb(216, 40, 40);
+            color: white;
+        }
+
+        .custom-viewdetails-btn {
+            background-color: rgb(197, 42, 70);
+            color: white;
+            font-weight: 600;
+            border: none;
+            border-radius: 7px;
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            padding: 10px 0;
+            height: 40px;
+            text-decoration: none;
+        }
+
+        .custom-viewdetails-btn:hover {
+            background-color: rgb(232, 80, 80);
+            color: white;
+        }
+
+        .btn-outline-danger {
+            font-weight: 600;
+            border-radius: 7px;
+            height: 40px;
+            margin-top: 10px;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: rgb(197, 42, 70);
+            color: white;
         }
     </style>
 </head>
 <body>
 
+<!-- Hero Section -->
+<section id="hero">
+    <h4>Trade In Offer</h4>
+    <h2>Super Deals</h2>
+    <h1>On All Events</h1>
+    <p>Apply coupon & get up to 50% off!</p>
+    <button>Shop Now</button>
+</section>
+
+<!-- Product Listing -->
 <div class="container mt-5">
     <h2 class="text-center mb-4">Our Products</h2>
     <div class="row g-4">
@@ -49,14 +138,24 @@
 
         while($row = $result->fetch_assoc()) {
             echo '
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm">
-                    <img src="assets/product_images/' . $row['image'] . '" class="card-img-top" alt="' . $row['name'] . '">
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch" style="padding-block-end: 50px">
+                <div class="card shadow-sm w-100">
+                    <img src="assets/product_images/' . $row['image'] . '" class="card-img-top" alt="' . htmlspecialchars($row['name']) . '">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">' . $row['name'] . '</h5>
-                        <p class="card-text">' . substr($row['description'], 0, 90) . '...</p>
-                        <p class="text-primary price-tag mb-2">₹' . $row['price'] . '</p>
-                        <a href="product_detail.php?id=' . $row['id'] . '" class="btn btn-success mt-auto">View Details</a>
+                        <h5 class="card-title">' . htmlspecialchars($row['name']) . '</h5>
+                        <p class="text-muted mb-1"><small>Category: ' . htmlspecialchars($row['category']) . '</small></p>
+                        <p class="card-text">' . htmlspecialchars(substr($row['description'], 0, 90)) . '...</p>
+                        <p class="text-primary price-tag mb-2">₹' . htmlspecialchars($row['price']) . '</p>
+                        
+                        <form action="add_to_cart.php" method="POST">
+                            <input type="hidden" name="product_id" value="' . $row['id'] . '">
+                            <button type="submit" class="custom-cart-btn">Add to Cart</button>
+                        </form>
+
+                        <form action="add_to_wishlist.php" method="POST" style="margin-top: 5px;">
+                            <input type="hidden" name="product_id" value="' . $row['id'] . '">
+                            <button type="submit" class="btn btn-outline-danger w-100">❤️ Add to Wishlist</button>
+                        </form>
                     </div>
                 </div>
             </div>';
@@ -65,5 +164,6 @@
     </div>
 </div>
 
+<?php include 'footer.php'; ?>
 </body>
 </html>
