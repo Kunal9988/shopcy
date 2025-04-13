@@ -35,6 +35,7 @@ $products = $conn->query("SELECT * FROM products");
 <div class="container mt-4">
     <h2 class="mb-4">Manage Products</h2>
     <a href="add_product.php" class="btn btn-success mb-3">Add New Product</a>
+    <a href="admin_dashboard.php" class="btn btn-success mb-3"style="background-color:red;"> < Back to dashboard</a>
 
     <table class="table table-bordered table-striped">
         <thead class="table-dark">

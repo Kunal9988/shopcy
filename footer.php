@@ -67,9 +67,15 @@
 
                 
 
-                <!-- Meetup Column -->
+                <!-- home Column -->
                 <div class="col-6 col-md-3 mb-3">
-                <a href="home.php" class="text-light text-decoration-none">Shopcy</a>
+                <ul style="list-style: none;">
+                <li><a href="home.php" class="text-light text-decoration-none">Shopcy</a></li>
+                <li><a href="home.php" class="text-light text-decoration-none">Careers</a></li>
+                <li><a href="home.php" class="text-light text-decoration-none">Contact us</a></li>
+</ul>
+
+              
                     
                 </div>
 
@@ -80,15 +86,34 @@
                     <div class="d-flex justify-content-center gap-2 mb-3">
                         <ul class="list-inline">
                             
-                            <li class="list-inline-item"><a href="#" class="text-light"><i class="fa fa-instagram"></i></a></li>
-                            <li class="list-inline-item"><a href="#" class="text-light"><i class="fa fa-youtube"></i></a></li>
-                        </ul>
+                        <li class="list-inline-item">
+  <a href="https://www.instagram.com/kunalmirgal/" class="text-light" target="_blank">
+    <i class="fa fa-instagram custom-circle"></i>
+  </a>
+</li>
 
-                    </div>
+<li class="list-inline-item">
+  <a href="https://www.youtube.com/@LEOPlays-w5i" class="text-light" target="_blank">
+    <i class="fa fa-youtube custom-circle"></i>
+  </a>
+</li>
 
-            </div>
+<li class="list-inline-item">
+  <a href="https://www.linkedin.com/in/kunal-mirgal-45ba2a220/" class="text-light" target="_blank">
+    <i class="fa fa-linkedin custom-circle"></i>
+  </a>
+</li>
 
-                </div>
+<li class="list-inline-item">
+  <a href="https://github.com/Kunal9988" class="text-light" target="_blank">
+    <i class="fa fa-github custom-circle"></i>
+  </a>
+</li>
+</ul>
+
+</div>
+</div>
+ </div>
             </div>
             <div class="row mt-4 border-top pt-3">
                 <div class="col-12 text-center">

@@ -32,6 +32,9 @@ if (isset($_GET['delete'])) {
 <body>
 <div class="container mt-4">
     <h2 class="mb-4">Manage Users</h2>
+    <a href="admin_dashboard.php" class="btn btn-success mb-3"style="background-color:red;"> < Back to dashboard</a>
+
+
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>

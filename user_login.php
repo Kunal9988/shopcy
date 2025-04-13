@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include 'includes/connection.php';
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
@@ -66,7 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <!-- ✅ Sign-up redirect message -->
                         <p class="text-center mt-3">
-                            Don’t have an account? <a href="user_signup.php">Sign up here</a>
+                            Don’t have an account? <a href="user_signup.php"style="color:red; text-decoration:none;">Sign up here</a><br>
+                            <a href="home.php"style="color:pink; text-decoration:none;">shopcy</a>
                         </p>
                     </form>
 

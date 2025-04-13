@@ -12,14 +12,14 @@
             background-color: #f9f9f9;
         }
         .card {
-            height: 100%;
+            height: auto;
             transition: transform 0.2s ease;
         }
         .card:hover {
             transform: translateY(-5px);
         }
         .card-img-top {
-            height: 200px;
+            height: 400px;
             object-fit: cover;
         }
         .card-text {
@@ -127,6 +127,66 @@
     <p>Apply coupon & get up to 50% off!</p>
     <button>Shop Now</button>
 </section>
+
+<!-- Feature Block Section -->
+<section class="feature-block py-5" style="background-color: #fff; padding-left: 40px; padding-right: 40px;">
+  <div class="container">
+    <h2 class="text-center mb-4">Our Collections</h2>
+    <div class="row g-4 text-center">
+      
+      <!-- Traditional Wear Collection -->
+      <div class="col-6 col-md-3">
+        <div class="card border-0">
+          <img src="assets/features_banner/traditional.jpg" class="card-img-top" alt="Traditional Collection" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">Traditional Collection</h5>
+            <p class="card-text">Grab our traditional wear for every occasion.</p>
+            <a href="traditional_collection.php" class="btn btn-dark">Explore Now</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Casual Wear Collection -->
+      <div class="col-6 col-md-3">
+        <div class="card border-0">
+          <img src="assets/features_banner/Casual_Wear.jpg" class="card-img-top" alt="Casual Wear Collection" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">Casual Wear Collection</h5>
+            <p class="card-text">Perfect for outings.</p>
+            <a href="Casual_Wear_collection.php" class="btn btn-dark">Explore Now</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Suits-Formals Collection -->
+      <div class="col-6 col-md-3">
+        <div class="card border-0">
+          <img src="assets/features_banner/Suits-formals.jpg" class="card-img-top" alt="Suits-Formals Collection" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">Suits-Formals Collection</h5>
+            <p class="card-text">Elevate your style with suits and formals.</p>
+            <a href="Suits-formals_collection.php" class="btn btn-dark">Explore Now</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Shadi Collection -->
+      <div class="col-6 col-md-3">
+        <div class="card border-0">
+          <img src="assets/features_banner/Shadi1.jpg" class="card-img-top" alt="Shadi Collection" style="height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">Shadi Collection</h5>
+            <p class="card-text">Elegant or extravagant, our Shadi Collection ensures you shine on your special day.</p>
+            <a href="Shadi_collection.php" class="btn btn-dark">Explore Now</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
 
 <!-- Product Listing -->
 <div class="container mt-5">

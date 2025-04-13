@@ -34,6 +34,10 @@ if (!$notLoggedIn) {
             height: 80px;
             object-fit: cover;
         }
+        .action-buttons form {
+            display: inline-block;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +63,7 @@ if (!$notLoggedIn) {
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
-                            <th style="width: 150px;">Actions</th>
+                            <th style="width: 180px;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,11 +86,14 @@ if (!$notLoggedIn) {
                                 </form>
                             </td>
                             <td>₹<?= number_format($total, 2) ?></td>
-                            <td>
-                                <form action="remove_from_cart.php" method="post" class="d-inline">
+                            <td class="action-buttons">
+                                <!-- Remove from cart -->
+                                <form action="remove_from_cart.php" method="post">
                                     <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                     <button type="submit" class="btn btn-sm btn-danger">❌ Remove</button>
                                 </form>
+
+                                
                             </td>
                         </tr>
                         <?php endwhile; ?>
