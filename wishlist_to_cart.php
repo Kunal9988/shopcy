@@ -38,6 +38,6 @@ if (isset($_POST['product_id']) && is_numeric($_POST['product_id'])) {
 }
 
 // ✅ You can change this redirect to 'wishlist.php' if preferred
-header("Location: home.php");
+header("location: wishlist.php");
 exit();
 ?>

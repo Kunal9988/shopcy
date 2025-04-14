@@ -25,6 +25,6 @@ if (isset($_POST['product_id'])) {
     }
 }
 
-header("Location: home.php");
+header("Location: wishlist.php");
 exit();
 ?>

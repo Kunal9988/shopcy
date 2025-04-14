@@ -64,6 +64,37 @@
             background-color: rgb(141, 109, 115);
             color: #000;
         }
+        #hero2 {
+            background-image: url("./assets/banners/banner2.jpg");
+            height: 90vh;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            padding: 0 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+        #hero2 h1, #hero h2, #hero h4, #hero p {
+            margin: 0;
+        }
+        #hero2 button {
+            background-color: rgba(236, 228, 228, 0.8);
+            color: #333;
+            border: none;
+            padding: 12px 30px;
+            margin-top: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        #hero2 button:hover {
+            background-color: rgb(141, 109, 115);
+            color: #000;
+        }
 
         .custom-cart-btn {
             background-color: rgb(159, 40, 88); 
@@ -184,6 +215,14 @@
       
     </div>
   </div>
+</section>
+
+<section id="hero2">
+    <!-- <h4>Trade In Offer</h4>
+    <h2>Super Deals</h2>
+    <h1>On All Events</h1>
+    <p>Apply coupon & get up to 50% off!</p>
+    <button>Shop Now</button> -->
 </section>
 
 

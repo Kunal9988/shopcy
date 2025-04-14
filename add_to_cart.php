@@ -48,6 +48,6 @@ if (isset($_POST['product_id']) && is_numeric($_POST['product_id'])) {
 }
 
 // ✅ Optional: redirect where needed
-header("Location: home.php"); // or home.php if you prefer
+header("Location: cart.php"); 
 exit();
 ?>
