@@ -105,7 +105,7 @@ $wishlist_count = isset($_SESSION['wishlist']) ? count($_SESSION['wishlist']) : 
                 <source src="./assets/logo.mov" type="video/webm">
             </video>
         </a>
-        <h5 style="padding-right:120px;">Buy.Style.Enjoy!</h5>
+        <h5 style="padding-right:120px;padding-right:70px;">Buy.Style.Enjoy!</h5>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -125,15 +125,7 @@ $wishlist_count = isset($_SESSION['wishlist']) ? count($_SESSION['wishlist']) : 
                 <li class="nav-item mx-2">
                     <a class="nav-link fs-4" href="women.php" title="Women"><i class="bi bi-gender-female"></i></a>
                 </li>
-                <!-- Cart -->
-                <li class="nav-item mx-2 position-relative">
-                    <a class="nav-link text-dark fs-4" href="cart.php" title="Cart">
-                        <i class="bi bi-cart3"></i>
-                        <?php if ($cart_count > 0): ?>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?= $cart_count ?></span>
-                        <?php endif; ?>
-                    </a>
-                </li>
+
                 <!-- Wishlist -->
                 <li class="nav-item mx-2 position-relative">
                     <a class="nav-link text-dark fs-4" href="wishlist.php" title="Wishlist">
@@ -143,6 +135,16 @@ $wishlist_count = isset($_SESSION['wishlist']) ? count($_SESSION['wishlist']) : 
                         <?php endif; ?>
                     </a>
                 </li>
+                <!-- Cart -->
+                <li class="nav-item mx-2 position-relative">
+                    <a class="nav-link text-dark fs-4" href="cart.php" title="Cart">
+                        <i class="bi bi-cart3"></i>
+                        <?php if ($cart_count > 0): ?>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?= $cart_count ?></span>
+                        <?php endif; ?>
+                    </a>
+                </li>
+                
                 <!-- Profile -->
                 <li class="nav-item mx-2">
                     <a class="nav-link text-dark fs-4" href="<?= isset($_SESSION['user_id']) ? 'profile.php' : '#' ?>"

@@ -9,7 +9,7 @@ $notLoggedIn = !isset($_SESSION['user_id']);
 if (!$notLoggedIn) {
     $user_id = $_SESSION['user_id'];
 
-    $query = $conn->prepare("SELECT products.*, cart.quantity 
+    $query = $conn->prepare("SELECT products.*, cart.quantity, cart.size 
                              FROM cart 
                              JOIN products ON cart.product_id = products.id 
                              WHERE cart.user_id = ?");
@@ -60,6 +60,7 @@ if (!$notLoggedIn) {
                         <tr>
                             <th>Image</th>
                             <th>Name</th>
+                            <th>Size</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
@@ -76,10 +77,12 @@ if (!$notLoggedIn) {
                         <tr>
                             <td><img src="assets/product_images/<?= htmlspecialchars($product['image']) ?>" class="cart-img" alt="<?= htmlspecialchars($product['name']) ?>"></td>
                             <td><?= htmlspecialchars($product['name']) ?></td>
+                            <td><?= htmlspecialchars($product['size']) ?></td>
                             <td>₹<?= htmlspecialchars($product['price']) ?></td>
                             <td>
                                 <form action="update_cart.php" method="post" class="d-flex justify-content-center align-items-center">
                                     <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                                    <input type="hidden" name="size" value="<?= htmlspecialchars($product['size']) ?>">
                                     <button type="submit" name="action" value="decrease" class="btn btn-sm btn-outline-secondary">−</button>
                                     <span class="mx-2"><?= htmlspecialchars($product['quantity']) ?></span>
                                     <button type="submit" name="action" value="increase" class="btn btn-sm btn-outline-secondary">+</button>
@@ -90,10 +93,9 @@ if (!$notLoggedIn) {
                                 <!-- Remove from cart -->
                                 <form action="remove_from_cart.php" method="post">
                                     <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                                    <input type="hidden" name="size" value="<?= htmlspecialchars($product['size']) ?>">
                                     <button type="submit" class="btn btn-sm btn-danger">❌ Remove</button>
                                 </form>
-
-                                
                             </td>
                         </tr>
                         <?php endwhile; ?>

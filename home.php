@@ -21,6 +21,7 @@
         .card-img-top {
             height: 400px;
             object-fit: cover;
+            border-radius: 8px;
         }
         .card-text {
             font-size: 0.95rem;
@@ -239,7 +240,12 @@
             echo '
             <div class="col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch" style="padding-block-end: 50px">
                 <div class="card shadow-sm w-100">
-                    <img src="assets/product_images/' . $row['image'] . '" class="card-img-top" alt="' . htmlspecialchars($row['name']) . '">
+                
+<a href="product_page.php?id=' . $row['id'] . '">
+    <img src="assets/product_images/' . $row['image'] . '" class="card-img-top" alt="' . htmlspecialchars($row['name']) . '">
+</a>
+
+
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">' . htmlspecialchars($row['name']) . '</h5>
                         <p class="text-muted mb-1"><small>Category: ' . htmlspecialchars($row['category']) . '</small></p>

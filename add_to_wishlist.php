@@ -9,18 +9,21 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-if (isset($_POST['product_id'])) {
+if (isset($_POST['product_id']) && isset($_POST['size'])) {
     $product_id = $_POST['product_id'];
+    $size = $_POST['size'];
     $user_id = $_SESSION['user_id'];
 
-    $check = $conn->prepare("SELECT * FROM wishlist WHERE user_id = ? AND product_id = ?");
-    $check->bind_param("ii", $user_id, $product_id);
+    // Check if the product with the same size is already in wishlist
+    $check = $conn->prepare("SELECT * FROM wishlist WHERE user_id = ? AND product_id = ? AND size = ?");
+    $check->bind_param("iis", $user_id, $product_id, $size);
     $check->execute();
     $result = $check->get_result();
 
     if ($result->num_rows == 0) {
-        $insert = $conn->prepare("INSERT INTO wishlist (user_id, product_id) VALUES (?, ?)");
-        $insert->bind_param("ii", $user_id, $product_id);
+        // Insert with size
+        $insert = $conn->prepare("INSERT INTO wishlist (user_id, product_id, size) VALUES (?, ?, ?)");
+        $insert->bind_param("iis", $user_id, $product_id, $size);
         $insert->execute();
     }
 }

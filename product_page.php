@@ -83,6 +83,14 @@ $result = $stmt->get_result();
         .add-to-cart-btn:hover {
             background-color: #e65c00;
         }
+
+        select[name="size"] {
+            padding: 6px 10px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -103,17 +111,24 @@ $result = $stmt->get_result();
                 <p><strong>Category:</strong> <?php echo htmlspecialchars($product['category']); ?></p>
                 <p><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
 
-                <form method="post" action="add_to_cart.php" style="display:inline;">
-    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-    <button type="submit" class="add-to-cart-btn">Add to Cart</button>
-</form>
-
-<form method="post" action="add_to_wishlist.php" style="display:inline;">
-    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-    <button type="submit" class="add-to-cart-btn">Add to Wishlist</button>
-</form>
-
-
+                <!-- Size Selection (Shared for both Add to Cart and Wishlist) -->
+                <form method="post" action="add_to_cart_or_wishlist.php" style="display:inline;">
+                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                    
+                    <!-- Size Selection Dropdown -->
+                    <label for="size">Size:</label>
+                    <select name="size" required>
+                        <option value="">Select Size</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    
+                    <!-- Buttons for Cart and Wishlist Actions -->
+                    <button type="submit" name="action" value="cart" class="add-to-cart-btn">Add to Cart</button>
+                    <button type="submit" name="action" value="wishlist" class="add-to-cart-btn">Add to Wishlist</button>
+                </form>
             </div>
         </div>
     <?php

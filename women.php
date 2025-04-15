@@ -21,10 +21,23 @@ $result = $conn->query($sql);
             height: 100%;
         }
         .product-image {
-            max-height: 200px;
+            height: 400px;
+            /* width: 100%; */
             object-fit: cover;
             border-radius: 8px;
-            width: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card-text {
+            font-size: 0.95rem;
+        }
+        .product-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .price-tag {
+            font-size: 1rem;
         }
         .custom-cart-btn {
             background-color: rgb(159, 40, 88); 

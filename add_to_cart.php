@@ -4,50 +4,30 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include 'includes/connection.php';
 
-// Redirect if user is not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: user_login.php");
     exit();
 }
 
-// Ensure product_id is set and valid
-if (isset($_POST['product_id']) && is_numeric($_POST['product_id'])) {
-    $product_id = (int)$_POST['product_id'];
-    $user_id = (int)$_SESSION['user_id'];
+if (isset($_POST['product_id']) && isset($_POST['size'])) {
+    $product_id = $_POST['product_id'];
+    $size = $_POST['size'];
+    $user_id = $_SESSION['user_id'];
 
-    // Check if product is already in cart
-    $stmt = $conn->prepare("SELECT quantity FROM cart WHERE user_id = ? AND product_id = ?");
-    if ($stmt) {
-        $stmt->bind_param("ii", $user_id, $product_id);
-        $stmt->execute();
-        $stmt->store_result();
+    // Check if the product with the same size is already in the cart
+    $check = $conn->prepare("SELECT * FROM cart WHERE user_id = ? AND product_id = ? AND size = ?");
+    $check->bind_param("iis", $user_id, $product_id, $size);
+    $check->execute();
+    $result = $check->get_result();
 
-        if ($stmt->num_rows > 0) {
-            // Update quantity if exists
-            $update = $conn->prepare("UPDATE cart SET quantity = quantity + 1 WHERE user_id = ? AND product_id = ?");
-            $update->bind_param("ii", $user_id, $product_id);
-            $update->execute();
-            $update->close();
-        } else {
-            // Insert if not exists
-            $insert = $conn->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, 1)");
-            $insert->bind_param("ii", $user_id, $product_id);
-            $insert->execute();
-            $insert->close();
-        }
-        $stmt->close();
-
-        // 🗑 Remove from wishlist if exists
-        $remove = $conn->prepare("DELETE FROM wishlist WHERE user_id = ? AND product_id = ?");
-        $remove->bind_param("ii", $user_id, $product_id);
-        $remove->execute();
-        $remove->close();
-    } else {
-        die("SQL Error: " . $conn->error);
+    if ($result->num_rows == 0) {
+        // Insert into cart with size
+        $insert = $conn->prepare("INSERT INTO cart (user_id, product_id, size) VALUES (?, ?, ?)");
+        $insert->bind_param("iis", $user_id, $product_id, $size);
+        $insert->execute();
     }
 }
 
-// ✅ Optional: redirect where needed
-header("Location: cart.php"); 
+header("Location: cart.php");
 exit();
 ?>

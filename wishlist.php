@@ -10,9 +10,15 @@ if (!isset($_SESSION['user_id'])) {
     $notLoggedIn = false;
     $user_id = $_SESSION['user_id'];
 
-    $query = $conn->prepare("SELECT products.* FROM wishlist 
+    // Modified: Added size support in query and error handling
+    $query = $conn->prepare("SELECT products.*, wishlist.size 
+                             FROM wishlist 
                              JOIN products ON wishlist.product_id = products.id 
                              WHERE wishlist.user_id = ?");
+    if ($query === false) {
+        die('MySQL Error: ' . $conn->error);  // This will show any MySQL error if the query fails
+    }
+
     $query->bind_param("i", $user_id);
     $query->execute();
     $result = $query->get_result();
@@ -20,8 +26,10 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Wishlist</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -52,6 +60,7 @@ if (!isset($_SESSION['user_id'])) {
                         <tr>
                             <th>Image</th>
                             <th>Name</th>
+                            <th>Size</th>
                             <th>Price</th>
                             <th style="width: 150px;">Actions</th>
                         </tr>
@@ -59,16 +68,19 @@ if (!isset($_SESSION['user_id'])) {
                     <tbody>
                         <?php while ($product = $result->fetch_assoc()): ?>
                             <tr>
-                                <td><img src="assets/product_images/<?= $product['image'] ?>" class="wishlist-img" alt="<?= $product['name'] ?>"></td>
+                                <td><img src="assets/product_images/<?= htmlspecialchars($product['image']) ?>" class="wishlist-img" alt="<?= htmlspecialchars($product['name']) ?>"></td>
                                 <td><?= htmlspecialchars($product['name']) ?></td>
+                                <td><?= htmlspecialchars($product['size']) ?></td>
                                 <td>₹<?= htmlspecialchars($product['price']) ?></td>
                                 <td>
                                     <form action="move_to_cart.php" method="post" class="d-inline">
                                         <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                                        <input type="hidden" name="size" value="<?= $product['size'] ?>">
                                         <button type="submit" class="btn btn-sm btn-success mb-1">🛒 Move to Cart</button>
                                     </form>
                                     <form action="remove_from_wishlist.php" method="post" class="d-inline">
                                         <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                                        <input type="hidden" name="size" value="<?= $product['size'] ?>">
                                         <button type="submit" class="btn btn-sm btn-danger">❌ Remove</button>
                                     </form>
                                 </td>
@@ -83,6 +95,6 @@ if (!isset($_SESSION['user_id'])) {
     <?php endif; ?>
 </div>
 
-<?php include 'footer.php';?>
+<?php include 'footer.php'; ?>
 </body>
 </html>

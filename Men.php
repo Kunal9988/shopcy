@@ -19,15 +19,30 @@ $result = $conn->query($sql);
             padding: 15px;
             margin-bottom: 20px;
             text-align: center;
-            height: 100%;
+            height: auto%;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
         }
         .product-image {
-            max-height: 200px;
-            width: 100%;
+            height: 400px;
+            /* width: 100%; */
             object-fit: cover;
             border-radius: 8px;
         }
-
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card-text {
+            font-size: 0.95rem;
+        }
+        .product-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .price-tag {
+            font-size: 1rem;
+        }
         .custom-cart-btn {
             background-color: rgb(159, 40, 88); 
             color: white;
