@@ -29,6 +29,11 @@ $wishlist_count = isset($_SESSION['wishlist']) ? count($_SESSION['wishlist']) : 
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
+    
+
+
+     
+
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./CSS/home.css">
