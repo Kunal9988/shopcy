@@ -9,35 +9,34 @@ $result = $conn->query($sql);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Women's Products</title>
+    <title>Women's Products | Shopcy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .product-card {
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-            height: 100%;
+        body {
+            background-color: #f9f9f9;
         }
-        .product-image {
+        .card {
+            height: auto;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-img-top {
             height: 400px;
-            /* width: 100%; */
             object-fit: cover;
             border-radius: 8px;
         }
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-        .product-card-text {
+        .card-text {
             font-size: 0.95rem;
         }
-        .product-card-title {
+        .card-title {
             font-size: 1.1rem;
             font-weight: 600;
         }
         .price-tag {
             font-size: 1rem;
+            font-weight: 600;
         }
         .custom-cart-btn {
             background-color: rgb(159, 40, 88); 
@@ -46,11 +45,12 @@ $result = $conn->query($sql);
             border: none;
             border-radius: 7px;
             width: 100%;
-            padding: 10px 0;
+            padding: 12px 0;
             margin-top: 10px;
         }
         .custom-cart-btn:hover {
             background-color: rgb(216, 40, 40);
+            color: white;
         }
 
         .btn-outline-danger {
@@ -68,27 +68,38 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
+
 <?php include 'navbar.php'; ?>
 
 <div class="container mt-5">
     <h2 class="text-center mb-4">Women's Collection</h2>
-    <div class="row">
+    <div class="row g-4">
         <?php while ($row = $result->fetch_assoc()): ?>
-            <div class="col-md-4 d-flex align-items-stretch">
-                <div class="product-card w-100 d-flex flex-column justify-content-between">
-                    <img src="assets/product_images/<?= htmlspecialchars($row['image']) ?>" class="product-image" alt="<?= htmlspecialchars($row['name']) ?>">
-                    <div class="mt-3">
-                        <h5><?= htmlspecialchars($row['name']) ?></h5>
-                        <p>₹<?= number_format($row['price'], 2) ?></p>
-                        <p class="text-muted"><?= htmlspecialchars($row['category']) ?></p>
+            <div class="col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch">
+                <div class="card shadow-sm w-100">
+                    <!-- Click to Product Details Page -->
+                    <a href="product_flash.php?id=<?= $row['id'] ?>">
+                        <img src="assets/product_images/<?= htmlspecialchars($row['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['name']) ?>">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title"><?= htmlspecialchars($row['name']) ?></h5>
+                        <p class="text-muted mb-1"><small>Category: <?= htmlspecialchars($row['category']) ?></small></p>
+                        <p class="card-text"><?= htmlspecialchars(substr($row['description'], 0, 90)) ?>...</p>
+                        <p class="text-primary price-tag mb-2">₹<?= number_format($row['price'], 2) ?></p>
 
-                        <form action="add_to_cart.php" method="POST">
+                        <!-- Add to Cart Form -->
+                        <form action="add_to_cart_or_wishlist.php" method="POST">
                             <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
+                            <input type="hidden" name="size" value="M">
+                            <input type="hidden" name="action" value="cart">
                             <button type="submit" class="custom-cart-btn">Add to Cart</button>
                         </form>
 
-                        <form action="add_to_wishlist.php" method="POST">
+                        <!-- Add to Wishlist Form -->
+                        <form action="add_to_cart_or_wishlist.php" method="POST">
                             <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
+                            <input type="hidden" name="size" value="M">
+                            <input type="hidden" name="action" value="wishlist">
                             <button type="submit" class="btn btn-outline-danger">❤️ Add to Wishlist</button>
                         </form>
                     </div>
@@ -99,5 +110,6 @@ $result = $conn->query($sql);
 </div>
 
 <?php include 'footer.php'; ?>
+
 </body>
 </html>
