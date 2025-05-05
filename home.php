@@ -8,6 +8,36 @@
     <title>Shopcy Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        #hero{
+    background-image: url("assets/banners/banner1.jpg");
+    height: 90vh;
+    width: 100%;
+    background-size: cover;
+    background-position: 25% right 0;
+    padding: 0 80px;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+   
+}
+#hero h4{
+    padding-bottom: 15px;
+}
+#hero h1{
+    color: rgb(91, 22, 22);
+}
+#hero button{
+    /* background-image: url("assets/banners/"); */
+    background-color: transparent;
+    color:rgb(53, 2, 2);
+    border: 0;
+    padding: 14px 80px 14px 65px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+}
         body { background-color: #f9f9f9; }
         .card { transition: transform 0.2s ease; }
         .card:hover { transform: translateY(-5px); }
@@ -45,7 +75,7 @@
 <body>
 
 <!-- Hero Banner -->
-<section id="hero" style="background: url('./assets/banners/banner1.jpg') center/cover no-repeat; height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 80px; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+<section id="hero" >
     <h4>Trade In Offer</h4>
     <h2>Super Deals</h2>
     <h1>On All Events</h1>

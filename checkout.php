@@ -68,41 +68,45 @@ while ($row = $cart_result->fetch_assoc()) {
 <?php include 'navbar.php'; ?>
 <div class="container checkout-container">
     <h2 class="text-center mb-5">Checkout</h2>
-    <div class="row">
-        <!-- Left Column -->
-        <div class="col-md-8">
-            <!-- Cart Summary -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5>Cart Summary</h5>
-                </div>
-                <div class="card-body">
-                    <?php if (count($cart_items) > 0): ?>
-                        <?php foreach ($cart_items as $item): ?>
-                            <div class="d-flex align-items-center border-bottom py-3">
-                                <img src="<?= htmlspecialchars($item['image']); ?>" alt="<?= htmlspecialchars($item['name']); ?>" class="me-3 product-image">
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1"><?= htmlspecialchars($item['name']); ?></h6>
-                                    <p class="mb-0">Size: <?= $item['size']; ?> | Qty: <?= $item['quantity']; ?></p>
-                                </div>
-                                <div class="text-end">
-                                    <p class="mb-0">₹<?= number_format($item['price'] * $item['quantity'], 2); ?></p>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p>Your cart is empty.</p>
-                    <?php endif; ?>
-                </div>
-            </div>
+    <form method="post" action="place_order.php">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-8">
+                <!-- Cart Summary -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Cart Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <?php if (count($cart_items) > 0): ?>
+                            <?php foreach ($cart_items as $item): ?>
+                                <div class="d-flex align-items-center border-bottom py-3">
 
-            <!-- Shipping Info -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5>Shipping Information</h5>
+                                <img src="assets/product_images/<?= htmlspecialchars($item['image']); ?>" alt="<?= htmlspecialchars($item['name']); ?>" class="me-3 product-image">
+
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1"><?= htmlspecialchars($item['name']); ?></h6>
+                                        <p class="mb-0">Size: <?= $item['size']; ?> | Qty: <?= $item['quantity']; ?></p>
+                                    </div>
+
+                                    <div class="text-end">
+                                        <p class="mb-0">₹<?= number_format($item['price'] * $item['quantity'], 2); ?></p>
+                                    </div>
+
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>Your cart is empty.</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form method="post" action="place_order.php">
+
+                <!-- Shipping Info -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Shipping Information</h5>
+                    </div>
+                    <div class="card-body">
                         <div class="mb-3">
                             <label for="billing_name" class="form-label">Full Name</label>
                             <input type="text" class="form-control" name="billing_name" id="billing_name" value="<?= htmlspecialchars($user['name']); ?>" required>
@@ -139,36 +143,36 @@ while ($row = $cart_result->fetch_assoc()) {
                         <div class="d-block d-md-none mt-3">
                             <button type="submit" class="btn btn-success w-100">Place Order</button>
                         </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Column: Order Summary -->
-        <div class="col-md-4">
-            <div class="card sticky-summary">
-                <div class="card-header">
-                    <h5>Order Summary</h5>
-                </div>
-                <div class="card-body">
-                    <?php foreach ($cart_items as $item): ?>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span><?= htmlspecialchars($item['name']); ?> (x<?= $item['quantity']; ?>)</span>
-                            <span>₹<?= number_format($item['subtotal'], 2); ?></span>
-                        </div>
-                    <?php endforeach; ?>
-                    <hr>
-                    <div class="d-flex justify-content-between fw-bold">
-                        <span>Total:</span>
-                        <span>₹<?= number_format($total_price, 2); ?></span>
                     </div>
-                    <button type="submit" class="btn btn-success w-100 mt-3">Place Order</button>
                 </div>
             </div>
-            </form>
+
+            <!-- Right Column: Order Summary -->
+            <div class="col-md-4">
+                <div class="card sticky-summary">
+                    <div class="card-header">
+                        <h5>Order Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <?php foreach ($cart_items as $item): ?>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><?= htmlspecialchars($item['name']); ?> (x<?= $item['quantity']; ?>)</span>
+                                <span>₹<?= number_format($item['subtotal'], 2); ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                        <hr>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total:</span>
+                            <span>₹<?= number_format($total_price, 2); ?></span>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 mt-3">Place Order</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 
-<?php include'footer.php'?>
+<?php include 'footer.php'; ?>
 </body>
 </html>
