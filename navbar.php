@@ -150,9 +150,9 @@ $wishlist_count = isset($_SESSION['wishlist']) ? count($_SESSION['wishlist']) : 
                     </a>
                 </li>
                 
-                <!-- Profile -->
+                <!-- Profile first "#" where we write name -->
                 <li class="nav-item mx-2">
-                    <a class="nav-link text-dark fs-4" href="<?= isset($_SESSION['user_id']) ? 'profile.php' : '#' ?>"
+                    <a class="nav-link text-dark fs-4" href="<?= isset($_SESSION['user_id']) ? '#' : '#' ?>"
                         title="Profile" <?= !isset($_SESSION['user_id']) ? 'data-bs-toggle="modal" data-bs-target="#loginModal"' : '' ?>>
                         <i class="bi bi-person-circle"></i>
                     </a>

@@ -72,7 +72,7 @@ $result = $stmt->get_result();
 
         .add-to-cart-btn {
             padding: 10px 20px;
-            background-color: #ff6f00;
+            background-color:rgb(203, 15, 78);
             color: white;
             border: none;
             font-size: 16px;
@@ -81,7 +81,7 @@ $result = $stmt->get_result();
         }
 
         .add-to-cart-btn:hover {
-            background-color: #e65c00;
+            background-color:rgb(230, 0, 119);
         }
 
         select[name="size"] {

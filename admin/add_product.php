@@ -104,6 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="jeans">Jeans</option>
                 <option value="suit">Suit</option>
                 <option value="shirt and pants">Shirt and Pants</option>
+                <option value="suit">Saree</option>
+                <option value="suit">Traditional Wear</option>
+                <option value="suit">Lehenga</option>
+                
+                
             </select>
         </div>
 
